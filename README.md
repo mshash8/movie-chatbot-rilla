@@ -28,11 +28,15 @@ To run Movie Chatbot Rilla, you will need Python 3.6 or higher. It is recommende
    ```bash
    cd movie-chatbot-rilla
    ```
-3. **Create a Virtual Environment**
+3. **Install Virtualenv**
+   ```bash
+   pip3 install virtualenv
+   ```
+4. **Create a Virtual Environment**
    ```bash
    virtualenv chatbot
    ```
-4. **Activate the Virtual Environment**
+5. **Activate the Virtual Environment**
    
    On macOS and Linux:
    ```bash
@@ -43,24 +47,28 @@ To run Movie Chatbot Rilla, you will need Python 3.6 or higher. It is recommende
    ```bash
      .\chatbot\Scripts\activate
    ```
-5. **Install Dependencies**
+6. **Install Dependencies**
    
    Install all required libraries using pip:
    ```bash
      pip3 install -r requirements.txt
    ```
-6. **Set Up Environment Variables**
+7. **Set Up Environment Variables**
    
    Open the .env file and enter your GPT API key and Neo4j sandbox credentials:
    ``` plaintext
    API_KEY='your_openai_api_key'  
-   NEO4J_URI='your_neo4j_sandbox_uri'  
+   NEO4J_URL='your_neo4j_sandbox_url'  
    NEO4J_USER='your_username'  
    NEO4J_PASSWORD='your_password'
    ```  
 8. **Run the Chatbot**
    ```bash
       python main.py
+   ```
+9. **Deactivate the Environment**
+   ```bash
+   deactivate
    ```
 ### Usage
 Once started, the chatbot will prompt you to ask questions regarding movies, actors, directors, or producers. Simply type your question to receive an informative response.
