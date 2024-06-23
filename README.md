@@ -19,7 +19,7 @@ The project is organized as follows:
    - Establishes a connection to a `Neo4j` database with specific credentials. This is used to execute Cypher queries directly against your graph database.
 
 2. **OpenAI Chat Model**:
-   - Initializes an instance of `ChatOpenAI` configured to interact using OpenAI's GPT-3.5 model, setting the model up with an API key and a zero temperature, ensuring deterministic outputs.
+   - Initializes an instance of `ChatOpenAI` configured to interact using OpenAI's gpt-4-0125-preview model, setting the model up with an API key and a zero temperature, ensuring deterministic outputs.
 
 3. **FewShotPromptTemplate**:
    - Prepares a few-shot learning environment where you provide examples of how questions map to Cypher queries. This helps the model learn how to generate appropriate queries based on user input. It's especially useful for dynamically generating queries when predefined queries do not suffice.
