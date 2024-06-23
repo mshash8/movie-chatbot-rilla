@@ -108,22 +108,22 @@ Some examples of questions that can be asked include:
 * Are there movies where the director is the actor of the movie?
 
 
-### Limitations
+## Limitations
 - **Dynamic Query Handling**: The need to dynamically handle asbtract queries indicates potential gaps in the static Cypher query templates. The predefined queries (few-shot examples) need to be more verbose and all-encompassing.
 - **Error Handling and Logs**: Adding more robust error handling and logging can help in diagnosing why certain queries fail and how the generated queries look like.
 - **Performance Optimization**: Each fallback to the `GraphCypherQAChain` involves a network request to OpenAI's servers, which may introduce latency and potential rate limits. Optimizing when and how often these fallbacks occur can improve user experience.
 
 
-### References
+## References
 1. [How to best prompt for Graph-RAG](https://python.langchain.com/v0.2/docs/how_to/graph_prompting/)
 2. [Semantic layer over graph database](https://python.langchain.com/v0.1/docs/use_cases/graph/semantic/)
 3. [Efficient Few-Shot Prompting in LangChain: Response Caching, Prompt Templating and Prompt Serialization-Part 2](https://jayant017.medium.com/efficient-few-shot-prompting-in-langchain-part-2-265b0bc013c5)
 4. [Building your own LLM RAG chatbot with Neo4j and Langchain](https://blog.futuresmart.ai/building-your-own-llm-rag-chatbot-with-neo4j-and-langchain)
 
-### Contributing
+## Contributing
 Contributions to Movie Chatbot Rilla are welcome! Please feel free to fork the repository, make changes, and submit pull requests. You can also open issues to discuss potential modifications or report bugs.
 
-### License
+## License
 Specify your project license here, which dictates how others can use and contribute to your code.
 
 
