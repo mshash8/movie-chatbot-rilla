@@ -1,7 +1,7 @@
 # Movie Chatbot Rilla
 
 ## Overview
-Movie Chatbot Rilla is a sophisticated chatbot powered by Python, LangChain, Neo4j, and the GPT model from OpenAI. It's designed to answer a variety of questions related to movies, including details about actors, directors, and producers. This solution leverages the graph database capabilities of Neo4j to store and retrieve complex relationships between entities in the film industry, and integrates the conversational intelligence of GPT to provide engaging and informative responses.
+Movie Chatbot Rilla is a chatbot powered by Python, LangChain, Neo4j, and the GPT model from OpenAI. It's designed to answer a variety of questions related to movies, including details about actors, directors, and producers. This solution leverages the graph database capabilities of Neo4j to store and retrieve complex relationships between entities like movies and persons, and integrates the conversational intelligence of GPT to provide engaging and informative responses.
 
 ## Project Structure
 The project is organized as follows:
@@ -34,11 +34,11 @@ The project is organized as follows:
    - The Agent is essentially a configurable pipeline that processes user inputs and other relevant data to generate responses. The Agent is defined as a sequence of operations or transformations, which are applied to the state of a conversation. These transformations include extracting and formatting data, applying prompt templates, and integrating language models with other tools for advanced processing. The main purpose of the Agent is to define how the chatbot should interpret and respond to inputs based on predefined logic and dynamic data handling strategies.
   
 7. **AgentExecutor**:
-   - The AgentExecutor manages the lifecycle and execution of the Agent. It is responsible for invoking the Agent with the appropriate inputs and managing the interaction between the Agent and the tools it utilizes. The Executor handles the orchestration of calling the Agent with new user inputs.
+   - The AgentExecutor manages the lifecycle and execution of the Agent. It is responsible for invoking the Agent with the appropriate inputs and managing the interaction between the Agent and the tools it utilizes. 
 
 ### Handling Complex Queries
 
-The `get_information` function within the chatbot is strategically designed to manage database queries with a two-tiered approach. Initially, it tries to retrieve information using a predefined Cypher query that is specifically structured to inject recognized entities from the user's input directly into the Neo4j database. If this initial attempt returns no results, an `IndexError` is caught, triggering the function's fallback mechanism. During this fallback, the function dynamically generates a Cypher query by leveraging the `GraphCypherQAChain`. This approach is particularly effective for handling complex or abstract queries, such as "how many actors are present in the graph", which may not conform to predefined query formats. This dual approach ensures robustness and flexibility in the chatbot's ability to retrieve and provide data.
+The `get_information` function within the chatbot is designed to manage database queries with a two-tiered approach. Initially, it tries to retrieve information using a predefined Cypher query that is specifically structured to inject recognized entities from the user's input directly into the Neo4j database. If this initial attempt returns no results, an `IndexError` is caught, triggering the function's fallback mechanism. During this fallback, the function dynamically generates a Cypher query by leveraging the `GraphCypherQAChain`. This approach is particularly effective for handling complex or abstract queries, such as "how many actors are present in the graph", which may not conform to predefined query formats. This dual approach ensures robustness and flexibility in the chatbot's ability to retrieve and provide data.
 
 
 ## Getting Started
@@ -109,9 +109,10 @@ Some examples of questions that can be asked include:
 
 
 ## Limitations
-- **Dynamic Query Handling**: The need to dynamically handle asbtract queries indicates potential gaps in the static Cypher query templates. The predefined queries (few-shot examples) need to be more verbose and all-encompassing.
-- **Error Handling and Logs**: Adding more robust error handling and logging can help in diagnosing why certain queries fail and how the generated queries look like.
-- **Performance Optimization**: Each fallback to the `GraphCypherQAChain` involves a network request to OpenAI's servers, which may introduce latency and potential rate limits. Optimizing when and how often these fallbacks occur can improve user experience.
+- **Dynamic Query Handling**: The need to dynamically handle abstract queries provides excellent flexibility, but the solution can be brittle and inconsistent, sometimes generating imprecise Cypher statements.
+- **Few-shot Prompting**: Adding several examples to the set of predefined queries (few-shot examples) can improve the robustness of the chatbot but comes at the cost of increased latency. A potential improvement could involve including only relevant examples to the query using a similarity search.
+- **Error Handling and Logs**: Enhancing error handling and logging can assist in diagnosing why certain queries fail and in understanding the nature of the generated queries.
+- **Performance Optimization**: Each fallback to the `GraphCypherQAChain` involves a network request to OpenAI's servers, which may introduce latency and encounter potential rate limits. Optimizing when and how often these fallbacks occur can significantly improve user experience.
 
 
 ## References
