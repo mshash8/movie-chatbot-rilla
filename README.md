@@ -73,6 +73,15 @@ To run Movie Chatbot Rilla, you will need Python 3.6 or higher. It is recommende
 ### Usage
 Once started, the chatbot will prompt you to ask questions regarding movies, actors, directors, or producers. Simply type your question to receive an informative response.
 
+### Limitations
+1. clzjvhdsvhldshv
+
+### References
+1. [How to best prompt for Graph-RAG](https://python.langchain.com/v0.2/docs/how_to/graph_prompting/)
+2. [Semantic layer over graph database](https://python.langchain.com/v0.1/docs/use_cases/graph/semantic/)
+3. [Efficient Few-Shot Prompting in LangChain: Response Caching, Prompt Templating and Prompt Serialization-Part 2](https://jayant017.medium.com/efficient-few-shot-prompting-in-langchain-part-2-265b0bc013c5)
+4. [Building your own LLM RAG chatbot with Neo4j and Langchain](https://blog.futuresmart.ai/building-your-own-llm-rag-chatbot-with-neo4j-and-langchain)
+
 ### Contributing
 Contributions to Movie Chatbot Rilla are welcome! Please feel free to fork the repository, make changes, and submit pull requests. You can also open issues to discuss potential modifications or report bugs.
 
