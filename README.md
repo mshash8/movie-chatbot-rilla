@@ -125,7 +125,7 @@ Some examples of questions that can be asked include:
 Contributions to Movie Chatbot Rilla are welcome! Please feel free to fork the repository, make changes, and submit pull requests. You can also open issues to discuss potential modifications or report bugs.
 
 ## License
-Specify your project license here, which dictates how others can use and contribute to your code.
+This project is open-source and follows the MIT License. You are free to use and modify the code according to the terms of the MIT License. 
 
 
 
