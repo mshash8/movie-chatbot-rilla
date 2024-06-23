@@ -16,7 +16,7 @@ The project is organized as follows:
 ### Core Components
 
 1. **Neo4jGraph Connection**:
-   - Establishes a connection to a Neo4j database with specific credentials. This is used to execute Cypher queries directly against your graph database.
+   - Establishes a connection to a `Neo4j` database with specific credentials. This is used to execute Cypher queries directly against your graph database.
 
 2. **OpenAI Chat Model**:
    - Initializes an instance of `ChatOpenAI` configured to interact using OpenAI's GPT-3.5 model, setting the model up with an API key and a zero temperature, ensuring deterministic outputs.
