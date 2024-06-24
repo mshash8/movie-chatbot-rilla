@@ -1,3 +1,29 @@
+"""
+This module defines the setup for interacting with a Neo4j graph database by providing 
+predefined Cypher query templates and examples, designed for use with a language model 
+that generates responses based on structured prompts. It encapsulates configurations 
+for generating precise, schema-aware Cypher queries in response to natural language questions.
+
+Key Components:
+- `description_query`: A comprehensive Cypher query template for retrieving detailed 
+  context about movies or persons within the graph, including their related entities.
+- `prefix`, `suffix`, `examples`: These elements define the structure and examples for 
+  constructing few-shot learning prompts that guide the language model to generate 
+  syntactically correct and contextually appropriate Cypher queries.
+- `agent_system_prompt`: Provides a detailed directive for the language model, ensuring 
+  responses are consistently derived from the database and adhere to specific user queries.
+
+Functionality:
+- These configurations facilitate the creation of a knowledgeable assistant capable of 
+  transforming user queries into actionable Cypher statements, and ensuring all interactions 
+  are grounded in the database content.
+
+Usage:
+- The setup is ideal for applications requiring dynamic and accurate access to a graph database 
+  through natural language interfaces, such as chatbots or interactive data exploration tools.
+"""
+
+
 description_query = """
 MATCH (m:Movie|Person)
 WHERE m.title CONTAINS $candidate OR m.name CONTAINS $candidate

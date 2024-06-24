@@ -1,6 +1,20 @@
+"""
+This module integrates advanced Natural Language Processing (NLP) capabilities to interface with a Neo4j graph database, enabling the execution of structured Cypher queries and free-form natural language queries about movies and related entities. Utilizing the LangChain library, the module sets up a chatbot that handles various types of user inputs to provide detailed, context-aware information.
+
+Components:
+- Neo4jCustomGraph: Manages connections and interactions with a Neo4j graph database, ensuring efficient data retrieval and management.
+- LLMCustom: A custom language model that processes and understands complex language queries, enhancing the chatbot's ability to generate accurate and relevant responses.
+- InformationTool: A specific tool built on LangChain's framework that allows querying detailed information about entities like movies or actors through both structured queries and natural language inputs.
+- AgentExecutor: Orchestrates the flow of data through different processing layers, from input reception to response generation, leveraging multiple custom and built-in LangChain tools.
+
+The module demonstrates how to bind a language model with specific functionalities (tools) that enhance its capabilities, making it more suitable for specialized tasks such as answering queries about movies. It includes example setups for prompt templates and agent configurations that are tailored to improve interaction quality and reliability.
+"""
+
+
 # Standard library imports
 from typing import Type
-
+import threading
+import queue
 # Third-party imports
 from langchain.agents import AgentExecutor
 from langchain.agents.format_scratchpad import format_to_openai_function_messages
@@ -18,6 +32,7 @@ import prompts
 from graph_setup import Neo4jCustomGraph
 from llm import LLMCustom
 import utils
+
 
 # Establish a connection with the Neo4j graph
 graph = Neo4jCustomGraph().get_graph_object()
@@ -85,7 +100,9 @@ class InformationInput(BaseModel):
         entity (str): The entity concerned, like a movie or person.
         user_input (str): Direct user input in natural language.
     """
-    entity: str = Field(description="The entity concerned, like a movie or person.")
+    entity: str = Field(
+        description="The specific entity in question, such as a 'movie' or 'person'. This field accepts both lowercase and uppercase text. The value should clearly identify a single, distinct entity to ensure accurate processing and classification."
+    )
     user_input: str = Field(description="Direct user input in natural language.")
 
 class InformationTool(BaseTool):
@@ -115,9 +132,7 @@ agent = (
         "user_input": lambda x: x["input"],
         "input": lambda x: x["input"],
         # Processes the 'chat_history' if it exists, otherwise initializes an empty list
-        "chat_history": lambda x: utils.format_chat_history(x["chat_history"])
-        if x.get("chat_history")
-        else [],
+        "chat_history": lambda x: utils.format_chat_history(x.get("chat_history", [])),
         # Formats function call intermediate steps to be compatible with OpenAI's message format
         "agent_scratchpad": lambda x: format_to_openai_function_messages(
             x["intermediate_steps"]
@@ -131,36 +146,58 @@ agent = (
 # The executor manages the lifecycle of the agent and handles interactions with tools
 agent_executor = AgentExecutor(agent=agent, tools=tools)
 
+def get_chat_response(user_input, chat_history, response_q):
+    data = agent_executor.invoke({"input": user_input, "chat_history": chat_history})
+    response_q.put(data)
+    
 def run_chat():
     """
     Runs the chat loop, processing user inputs and displaying responses.
     Collects feedback on the responses for improvement.
     """
+    print("****")
+    print()
+    print("Welcome to the Movie Chatbot! I can provide information about movies and actors from my database.")
+    print("Feel free to ask me questions such as, 'Who starred in Sleepless in Seattle?'")
+    print()
+    print("****")
+    print()
     chat_history = []  # Initializes chat history to store conversation
     while True:
         user_input = input("You: ")  # Takes input from the user
         # Exit loop if user types "quit" or "exit"
         if user_input.lower() in ["quit", "exit"]:
             break
+        elif user_input == "feedback":
+            # Request feedback on the bot's response
+            feedback = input("Was the response helpful? (yes/no): ").strip().lower()
+            if feedback == "no":
+                # If feedback is negative, request more details and thank the user for the feedback
+                additional_feedback = input("What was wrong with the response? ")
+                print("Thank you for your feedback! We will try to improve.")
+                chat_history.append(("user", f"Feedback: {additional_feedback}"))
+            elif feedback == "yes":
+                # Positive feedback acknowledgement
+                print("Glad to hear that!")
+            continue
         # Invoke the agent with the current input and chat history to generate a response
-        response = agent_executor.invoke({"input": user_input, "chat_history": chat_history})
+        response_q = queue.Queue()
+        ai_thread = threading.Thread(target=get_chat_response, args=(user_input, chat_history, response_q))
+        ai_thread.start()
+        
+        utils.print_dots(ai_thread)
+        
+        ai_thread.join()
+        
+        response = response_q.get()
+        print()
         print("Bot:", response["output"])  # Display the bot's response
         # Record user and bot messages in the chat history
         chat_history.append(("user", user_input))
         chat_history.append(("bot", response["output"]))
-        
-        # Request feedback on the bot's response
-        feedback = input("Was this response helpful? (yes/no): ").strip().lower()
-        if feedback == "no":
-            # If feedback is negative, request more details and thank the user for the feedback
-            additional_feedback = input("What was wrong with the response? ")
-            print("Thank you for your feedback! We will try to improve.")
-            chat_history.append(("user", f"Feedback: {additional_feedback}"))
-        elif feedback == "yes":
-            # Positive feedback acknowledgement
-            print("Glad to hear that!")
-        # Append the feedback to chat history for future reference
-        chat_history.append(("user_feedback", feedback))
+        print()
+        print('To provide feedback, enter "feedback"')
+        print()
 
 if __name__ == "__main__":
     run_chat()
