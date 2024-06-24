@@ -2,6 +2,8 @@
 This module demonstrates various functionalities of a movie chatbot. It runs predefined demos
 that showcase different capabilities such as handling case insensitivity, maintaining history,
 and integrating user feedback into responses.
+
+The demos section in the README provides further information on how to run this.
 """
 import main
 import queue
