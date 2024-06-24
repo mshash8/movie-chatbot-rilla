@@ -11,6 +11,7 @@ The project is organized as follows:
 - `main.py`: The main executable script that runs the chatbot, orchestrating the flow of data and interactions.
 - `.env`: A configuration file that stores sensitive credentials such as the Neo4j connection details and the GPT API key.
 - `prompts.py`: Houses all necessary prompts, queries, and template configurations required for generating the chatbot's responses.
+- `demos.py`: Contains a script to run four demos demonstrating the capabilities and functioning of the chatbot.
   
 ## Chatbot Architecture
 ### Core Components
