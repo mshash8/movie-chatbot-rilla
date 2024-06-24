@@ -108,12 +108,12 @@ Some examples of questions that can be asked include:
 * Are there movies where the director is the actor of the movie?
 
 ## Demo
-The demos.py script is designed to evaluate the performance and capabilities of this chatbot. It includes four demos, each highlighting a specific capability of the chatbot. To run this file, execute the command: python demos.py.
+The `demos.py` script is designed to evaluate the performance and capabilities of this chatbot. It includes four demos, each highlighting a specific capability of the chatbot. To run this file, execute the command: `python demos.py`.
 
-demo1: This simple demo showcases the chatbot's ability to query the database.
-demo2: This demo displays the chatbot's capability to receive feedback on response quality and then act on that feedback.
-demo3: This demo demonstrates the chatbot's memory capability. It shows that the chatbot can remember previous interactions and maintain context.
-demo4: This demo illustrates the robustness of the chatbot in extracting entities in a case-insensitive manner.
+- **demo1**: This simple demo showcases the chatbot's ability to query the database.
+- **demo2**: This demo displays the chatbot's capability to receive feedback on response quality and then act on that feedback.
+- **demo3**: This demo demonstrates the chatbot's memory capability. It shows that the chatbot can remember previous interactions and maintain context.
+- **demo4**: This demo illustrates the robustness of the chatbot in extracting entities in a case-insensitive manner.
 
 
 ## Limitations
