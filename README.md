@@ -56,7 +56,7 @@ To run Movie Chatbot, you will need Python 3.6 or higher. It is recommended to u
    ```
 2. **Navigate to the Project Directory**
    ```bash
-   cd movie-chatbot
+   cd movie-chatbot-rilla
    ```
 3. **Install Virtualenv**
    ```bash
