@@ -1,7 +1,7 @@
-# Movie Chatbot Rilla
+# Movie Chatbot 
 
 ## Overview
-Movie Chatbot Rilla is a chatbot powered by Python, LangChain, Neo4j, and the GPT model from OpenAI. It's designed to answer a variety of questions related to movies, including details about actors, directors, and producers. This solution leverages the graph database capabilities of Neo4j to store and retrieve complex relationships between entities like movies and persons, and integrates the conversational intelligence of GPT to provide engaging and informative responses.
+Movie Chatbot is a chatbot powered by Python, LangChain, Neo4j, and the GPT model from OpenAI. It's designed to answer a variety of questions related to movies, including details about actors, directors, and producers. This solution leverages the graph database capabilities of Neo4j to store and retrieve complex relationships between entities like movies and persons, and integrates the conversational intelligence of GPT to provide engaging and informative responses.
 
 ## Project Structure
 The project is organized as follows:
@@ -45,7 +45,7 @@ The `get_information` function within the chatbot is designed to manage database
 ## Getting Started
 
 ### Prerequisites
-To run Movie Chatbot Rilla, you will need Python 3.6 or higher. It is recommended to use a virtual environment to manage the dependencies.
+To run Movie Chatbot, you will need Python 3.6 or higher. It is recommended to use a virtual environment to manage the dependencies.
 
 ### Installation
 
@@ -56,7 +56,7 @@ To run Movie Chatbot Rilla, you will need Python 3.6 or higher. It is recommende
    ```
 2. **Navigate to the Project Directory**
    ```bash
-   cd movie-chatbot-rilla
+   cd movie-chatbot
    ```
 3. **Install Virtualenv**
    ```bash
@@ -131,7 +131,7 @@ The `demos.py` script is designed to evaluate the performance and capabilities o
 4. [Building your own LLM RAG chatbot with Neo4j and Langchain](https://blog.futuresmart.ai/building-your-own-llm-rag-chatbot-with-neo4j-and-langchain)
 
 ## Contributing
-Contributions to Movie Chatbot Rilla are welcome! Please feel free to fork the repository, make changes, and submit pull requests. You can also open issues to discuss potential modifications or report bugs.
+Contributions to Movie Chatbot are welcome! Please feel free to fork the repository, make changes, and submit pull requests. You can also open issues to discuss potential modifications or report bugs.
 
 ## License
 This project is open-source and follows the MIT License. You are free to use and modify the code according to the terms of the MIT License. 
